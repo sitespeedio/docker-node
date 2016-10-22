@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 # Dockerfile based on https://github.com/nodejs/docker-node/blob/master/6.4/slim/Dockerfile
 
