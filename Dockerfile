@@ -18,7 +18,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.4.0
+ENV NODE_VERSION 6.9.1
 
 RUN buildDeps='xz-utils curl ca-certificates' \
     && set -x \
