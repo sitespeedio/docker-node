@@ -27,4 +27,5 @@ RUN apt-get update -y && apt-get install -y \
 RUN wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
   tar xf ffmpeg-release-64bit-static.tar.xz && \
   mv ffmpeg*/ffmpeg /usr/bin/ && \
+  mv ffmpeg*/ffprobe /usr/bin/ && \
   rm ffmpeg-release-64bit-static.tar.xz
