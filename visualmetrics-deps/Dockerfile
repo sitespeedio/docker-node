@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu16.04-nodejs6.9.1
+FROM sitespeedio/node:ubuntu16.04-nodejs6.10.3
 
 # Lets install all dependencies for VisualMetrics
 RUN apt-get update -y && apt-get install -y \
