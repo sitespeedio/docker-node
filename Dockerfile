@@ -18,7 +18,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.10.3
+ENV NODE_VERSION 6.11.0
 
 RUN buildDeps='xz-utils curl ca-certificates' \
     && set -x \
@@ -30,6 +30,8 @@ RUN buildDeps='xz-utils curl ca-certificates' \
     && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
     && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
     && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
-    && apt-get purge -y --auto-remove $buildDeps
+    && curl -L https://www.npmjs.com/install.sh | sh \
+    && apt-get purge -y --auto-remove $buildDeps 
 
-CMD [ "node", "--version" ]
+
+CMD [ "npm", "--version" ]
