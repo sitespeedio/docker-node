@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 
 # Dockerfile based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 
@@ -20,7 +20,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 6.11.1
+ENV NODE_VERSION 8.7.0
 
 RUN buildDeps='xz-utils curl ca-certificates' \
     && set -x \
