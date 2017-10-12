@@ -2,6 +2,8 @@ FROM ubuntu:17.04
 
 # Dockerfile based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg2 dirmngr
+
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN set -ex \
   && for key in \
