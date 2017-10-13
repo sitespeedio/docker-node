@@ -1,7 +1,8 @@
 FROM sitespeedio/node:ubuntu16.04-nodejs6.11.1-2
 
 # Lets install all dependencies for VisualMetrics
-RUN apt-get update -y && apt-get install -y \
+RUN buildDeps='wget' && \
+  apt-get update -y && apt-get install -y \
   imagemagick \
   ipython \
   ipython-notebook \
@@ -21,11 +22,10 @@ RUN apt-get update -y && apt-get install -y \
   --no-install-recommends --force-yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   pip install --upgrade pip && \
   pip install --upgrade setuptools && \
-  pip install pyssim
-
-# Install a static version of FFMPEG
-RUN wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
+  pip install pyssim && \
+  wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
   tar xf ffmpeg-release-64bit-static.tar.xz && \
   mv ffmpeg*/ffmpeg /usr/bin/ && \
   mv ffmpeg*/ffprobe /usr/bin/ && \
-  rm ffmpeg-release-64bit-static.tar.xz
+  rm ffmpeg-release-64bit-static.tar.xz && \
+  apt-get purge -y --auto-remove $buildDeps \
