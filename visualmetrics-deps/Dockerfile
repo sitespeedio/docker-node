@@ -5,7 +5,6 @@ RUN buildDeps='wget' && \
   apt-get update -y && apt-get install -y \
   imagemagick \
   ipython \
-  ipython-notebook \
   libjpeg-dev \
   python \
   python-dev \
@@ -17,8 +16,8 @@ RUN buildDeps='wget' && \
   python-pip \
   python-sympy \
   python-nose \
-  wget \
   xz-utils \
+  $buildDeps \
   --no-install-recommends --force-yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   pip install --upgrade pip && \
   pip install --upgrade setuptools && \
