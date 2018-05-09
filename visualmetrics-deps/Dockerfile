@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu17.10-nodejs8.11.1
+FROM sitespeedio/node:ubuntu-18.04-nodejs8.11.1
 
 # Lets install all dependencies for VisualMetrics
 RUN buildDeps='wget' && \
