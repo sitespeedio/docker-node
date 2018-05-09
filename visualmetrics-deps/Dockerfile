@@ -20,7 +20,7 @@ RUN buildDeps='wget' && \
   $buildDeps \
   --no-install-recommends --force-yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   python -m pip install --upgrade pip && \
-  python -m -m pip install --upgrade setuptools && \
+  python -m pip install --upgrade setuptools && \
   python -m pip install pyssim && \
   wget http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
   tar xf ffmpeg-release-64bit-static.tar.xz && \
