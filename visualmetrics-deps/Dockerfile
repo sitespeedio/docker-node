@@ -8,7 +8,7 @@ RUN buildDeps='wget' && \
   libjpeg-dev \
   python \
   python-dev \
-  python-imaging \
+  python-pil \
   python-numpy \
   python-scipy \
   python-matplotlib \
