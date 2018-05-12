@@ -23,6 +23,6 @@ RUN buildDeps='wget' && \
   python -m pip install --upgrade setuptools && \
   python -m pip install pyssim && \
   wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
-  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-64bit-static.tar.xz */ffmpeg */ffprobe && \
+  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-64bit-static.tar.xz --wildcards */ffmpeg */ffprobe && \
   rm ffmpeg-release-64bit-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps \
