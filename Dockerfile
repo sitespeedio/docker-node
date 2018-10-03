@@ -4,7 +4,7 @@ FROM ubuntu:18.04
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 8.11.1
+ENV NODE_VERSION 8.12.0
 
 RUN buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
     && set -x \
