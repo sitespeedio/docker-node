@@ -8,7 +8,7 @@ ENV NODE_VERSION 10.13.0
 
 RUN buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
     && set -x \
-    && apt-get update && apt-get upgrade && apt-get install -y $buildDeps --no-install-recommends \
+    && apt-get update && apt-get upgrade -y && apt-get install -y $buildDeps --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && set -ex \
       && for key in \
