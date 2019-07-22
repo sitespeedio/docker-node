@@ -1,10 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:19.04
 
 # Dockerfile originally based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 10.15.3
+ENV NODE_VERSION 10.16.0
 
 RUN buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
     && set -x \
