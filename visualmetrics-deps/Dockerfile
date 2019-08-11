@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-18.04-nodejs10.13.0
+FROM sitespeedio/node:ubuntu-19.04-nodejs10.16.0
 
 # Lets install all dependencies for VisualMetrics
 RUN buildDeps='wget' && \
@@ -22,7 +22,7 @@ RUN buildDeps='wget' && \
   python -m pip install --upgrade pip && \
   python -m pip install --upgrade setuptools && \
   python -m pip install pyssim && \
-  wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz && \
-  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-64bit-static.tar.xz --wildcards */ffmpeg */ffprobe && \
-  rm ffmpeg-release-64bit-static.tar.xz && \
+  wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz && \
+  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-amd64-static.tar.xz --wildcards */ffmpeg */ffprobe && \
+  rm ffmpeg-release-amd64-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps \
