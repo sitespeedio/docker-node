@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ARG PLATFORM=x64
+ARG TARGETPLATFORM
 
 # Dockerfile originally based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 # gpg keys listed at https://github.com/nodejs/node#release-team
@@ -8,7 +8,8 @@ ARG PLATFORM=x64
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 14.16.0
 
-RUN buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
+RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
+  buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
   && set -x \
   && apt-get update && apt-get upgrade -y && apt-get install -y $buildDeps --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
