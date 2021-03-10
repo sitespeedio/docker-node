@@ -9,7 +9,6 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   imagemagick \
   libjpeg-dev \
   python3 \
-  python2 \
   python3-dev \
   python3-pip \
   python-is-python3 \
