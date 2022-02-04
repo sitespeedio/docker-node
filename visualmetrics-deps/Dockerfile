@@ -1,10 +1,11 @@
-FROM sitespeedio/node:ubuntu-20.04-nodejs-14.16.0
+FROM sitespeedio/node:ubuntu-20.04-nodejs-16.13.2
 
 ARG TARGETPLATFORM
+ENV DEBIAN_FRONTEND noninteractive
 
 # Lets install all dependencies for VisualMetrics
 RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64"; else echo "arm64"; fi) \
-  buildDeps='wget ca-certificates' && \
+  buildDeps='wget ca-certificates build-essential' && \
   apt-get update -y && apt-get install -y \
   imagemagick \
   libjpeg-dev \
@@ -19,6 +20,6 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   python -m pip install --upgrade setuptools && \
   python -m pip install pyssim Pillow image && \
   wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$BUILD-static.tar.xz && \
-  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-$BUILD-static.tar.xz --wildcards */ffmpeg && \
+  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-$BUILD-static.tar.xz --wildcards ffmpeg*/ff*  && \
   rm ffmpeg-release-$BUILD-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps
