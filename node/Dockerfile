@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:focal-20220113
 
 ARG TARGETPLATFORM
 
@@ -6,7 +6,7 @@ ARG TARGETPLATFORM
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 14.17.1
+ENV NODE_VERSION 16.13.2
 
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
   buildDeps='xz-utils curl ca-certificates gnupg2 dirmngr' \
@@ -28,9 +28,8 @@ RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"
     108F52B48DB57BB0CC439B2997B01419BD92F80A \
     B9E2F5981AA6E0CD28160D9FF13993A75599653C \
   ; do \
-    gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
-    gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --batch --keyserver hkp://pgp.mit.edu:80 --recv-keys "$key" ; \
+    gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
+    gpg --batch --keyserver keyserver.ubuntu.com  --recv-keys "$key" ; \
   done \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" \
   && curl -SLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
