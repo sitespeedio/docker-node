@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-20.04-nodejs-16.13.2
+FROM sitespeedio/node:ubuntu-22.04-nodejs-16.14.2
 
 ARG TARGETPLATFORM
 ENV DEBIAN_FRONTEND noninteractive
@@ -18,7 +18,7 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   --no-install-recommends --force-yes && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
   python -m pip install --upgrade pip && \
   python -m pip install --upgrade setuptools && \
-  python -m pip install pyssim Pillow image && \
+  python -m pip install pyssim OpenCV-Python Numpy image && \
   wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$BUILD-static.tar.xz && \
   tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-$BUILD-static.tar.xz --wildcards ffmpeg*/ff*  && \
   rm ffmpeg-release-$BUILD-static.tar.xz && \
