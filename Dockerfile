@@ -1,4 +1,4 @@
-FROM ubuntu:focal-20220316
+FROM ubuntu:jammy-20220421
 
 ARG TARGETPLATFORM
 
