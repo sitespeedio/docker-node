@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-20.04-nodejs-16.5.0
+FROM sitespeedio/node:ubuntu-22.04-nodejs-18.16.0
 
 ARG TARGETPLATFORM
 ENV DEBIAN_FRONTEND noninteractive
@@ -7,8 +7,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64"; else echo "arm64"; fi) \
   buildDeps='wget ca-certificates build-essential' && \
   apt-get update -y && apt-get install -y \
-  imagemagick \
   libjpeg-dev \
+  imagemagick \
   python3 \
   python3-dev \
   python3-pip \
