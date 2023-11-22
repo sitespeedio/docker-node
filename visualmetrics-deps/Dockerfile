@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-22.04-nodejs-18.16.0
+FROM sitespeedio/node:ubuntu-22-04-nodejs-20.9.0
 
 ARG TARGETPLATFORM
 ENV DEBIAN_FRONTEND noninteractive
