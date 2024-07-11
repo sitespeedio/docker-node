@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20240605
+FROM ubuntu:jammy-20240627.1
 
 ARG TARGETPLATFORM
 
