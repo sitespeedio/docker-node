@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20240212
+FROM ubuntu:noble-20240605
 
 ARG TARGETPLATFORM
 
@@ -6,7 +6,7 @@ ARG TARGETPLATFORM
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 20.11.1
+ENV NODE_VERSION 20.15.1
 
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
   buildDeps='xz-utils curl ca-certificates gnupg2 lsb-release dirmngr' \
