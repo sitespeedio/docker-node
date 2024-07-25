@@ -19,7 +19,7 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   python -m pip install --upgrade pip && \
   python -m pip install --upgrade setuptools && \
   python -m pip install pyssim OpenCV-Python Numpy image && \
-  wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$BUILD-static.tar.xz && \
-  tar --strip-components 1 -C /usr/bin -xf ffmpeg-release-$BUILD-static.tar.xz --wildcards ffmpeg*/ff*  && \
-  rm ffmpeg-release-$BUILD-static.tar.xz && \
+  wget https://johnvansickle.com/ffmpeg/old-releases/ffmpeg-5.1.1-$BUILD-static.tar.xz && \
+  tar --strip-components 1 -C /usr/bin -xf ffmpeg-5.1.1-$BUILD-static.tar.xz --wildcards ffmpeg*/ff*  && \
+  rm ffmpeg-5.1.1-$BUILD-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps
