@@ -5,8 +5,8 @@ ARG TARGETPLATFORM
 # Dockerfile originally based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
-ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 20.17.0
+ENV NPM_CONFIG_LOGLEVEL=info
+ENV NODE_VERSION=22.13.0
 
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
   buildDeps='xz-utils curl ca-certificates gnupg2 lsb-release dirmngr' \
