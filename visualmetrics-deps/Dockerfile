@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-22-04-nodejs-22.13.0
+FROM sitespeedio/node:ubuntu-24-04-nodejs-22.13.0
 
 ARG TARGETPLATFORM
 
