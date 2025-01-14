@@ -8,9 +8,8 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   apt-get update -y && apt-get install -y \
   libjpeg-dev \
   imagemagick \
-  python3 \
   python3-venv \
-  python3-dev \
+  python3 \
   xz-utils \
   $buildDeps \
   --no-install-recommends --force-yes && \
@@ -23,5 +22,5 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   rm ffmpeg-5.1.1-$BUILD-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps
 
-# Set the virtual environment as the default Python environment
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/opt/venv/bin:${PATH}"
+CMD [ "python3", "--version" ]
