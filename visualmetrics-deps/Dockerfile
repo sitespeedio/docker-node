@@ -17,9 +17,9 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   python3 -m venv /opt/venv && \
   /opt/venv/bin/pip install --upgrade pip setuptools && \
   /opt/venv/bin/pip install --no-cache-dir pyssim OpenCV-Python Numpy image && \
-  wget https://johnvansickle.com/ffmpeg/old-releases/ffmpeg-5.1.1-$BUILD-static.tar.xz && \
-  tar --strip-components 1 -C /usr/bin -xf ffmpeg-5.1.1-$BUILD-static.tar.xz --wildcards ffmpeg*/ff* && \
-  rm ffmpeg-5.1.1-$BUILD-static.tar.xz && \
+  wget https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$BUILD-static.tar.xz && \
+  tar --strip-components 1 -C /usr/bin -xf ffmpeg-$BUILD-static.tar.xz --wildcards ffmpeg*/ff* && \
+  rm ffmpeg-$BUILD-static.tar.xz && \
   apt-get purge -y --auto-remove $buildDeps
 
 ENV PATH="/opt/venv/bin:${PATH}"
