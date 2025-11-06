@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-22-04-nodejs-22.13.0
+FROM sitespeedio/node:ubuntu-24-04-nodejs-24.11.0
 
 ARG TARGETPLATFORM
 
@@ -23,4 +23,4 @@ RUN export BUILD=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "amd64";
   apt-get purge -y --auto-remove $buildDeps
 
 ENV PATH="/opt/venv/bin:${PATH}"
-CMD [ "python3", "--version" ]
+CMD [ "python", "--version" ]
