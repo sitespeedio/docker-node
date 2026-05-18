@@ -9,12 +9,13 @@ ENV NPM_CONFIG_LOGLEVEL=info
 ENV NODE_VERSION=24.14.0
 
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
-  buildDeps='xz-utils curl ca-certificates gnupg2 lsb-release dirmngr' \
+  && buildDeps='xz-utils curl gnupg2 lsb-release dirmngr' \
   && set -x \
-  && apt-get update && apt-get upgrade -y && apt-get install -y $buildDeps --no-install-recommends \
+  && apt-get update && apt-get install -y --no-install-recommends ca-certificates $buildDeps \
   && rm -rf /var/lib/apt/lists/* \
   # gpg keys listed at https://github.com/nodejs/node#release-keys
   && set -ex \
+  && export GNUPGHOME="$(mktemp -d)" \
   && for key in \
     4ED778F539E3634C779C87C6D7062848A1AB005C \
     141F07595B7B3FFE74309A937405533BE57C7D57 \
@@ -36,6 +37,8 @@ RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"
   && grep " node-v$NODE_VERSION-linux-$PLATFORM.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
+  && { gpgconf --kill all || true; } \
+  && rm -rf "$GNUPGHOME" \
   && apt-get purge -y --auto-remove $buildDeps \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
