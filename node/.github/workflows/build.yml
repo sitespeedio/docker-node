@@ -1,0 +1,19 @@
+name: Build the docker container
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-24.04
+    if: ${{ !contains(github.event.head_commit.message, 'docs:') }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker buildx install
+          docker buildx build --load --platform linux/amd64 -t docker.io/sitespeedio/node:${{ github.sha }} .
