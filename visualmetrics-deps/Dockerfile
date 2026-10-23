@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-24-04-nodejs-24.18.0
+FROM sitespeedio/node:ubuntu-24-04-nodejs-24.22.1
 
 ENV DEBIAN_FRONTEND=noninteractive
 
