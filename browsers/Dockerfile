@@ -1,7 +1,7 @@
-FROM sitespeedio/visualmetrics-deps:ffmpeg-7.1.1-e
+FROM sitespeedio/visualmetrics-deps:ffmpeg-7.1.1-f
 
 ARG TARGETPLATFORM
-ARG FIREFOX_VERSION=158.*
+ARG FIREFOX_VERSION=159.*
 ARG CHROME_VERSION=156.*
 ARG EDGE_VERSION=156.*
 
