@@ -1,4 +1,4 @@
-FROM sitespeedio/node:ubuntu-24-04-nodejs-26.13.0-b
+FROM sitespeedio-node
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -9,13 +9,12 @@ RUN buildDeps='wget build-essential software-properties-common' && \
   add-apt-repository -y ppa:ubuntuhandbook1/ffmpeg7 && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
-    libjpeg-dev \
     imagemagick \
     python3-venv \
     xz-utils \
     ffmpeg && \
   python3 -m venv /opt/venv && \
-  /opt/venv/bin/pip install --no-cache-dir pyssim opencv-python numpy Pillow && \
+  /opt/venv/bin/pip install --no-cache-dir pyssim opencv-python-headless numpy Pillow && \
   apt-get purge -y --auto-remove $buildDeps && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

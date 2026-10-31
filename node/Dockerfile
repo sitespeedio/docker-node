@@ -1,12 +1,14 @@
-FROM ubuntu:noble-20261024.1
+ARG UBUNTU_IMAGE
+FROM ${UBUNTU_IMAGE}
 
 ARG TARGETPLATFORM
+ARG NODE_VERSION
 
 # Dockerfile originally based on https://github.com/nodejs/docker-node/blob/master/6.11/slim/Dockerfile
 # gpg keys listed at https://github.com/nodejs/node#release-team
 
 ENV NPM_CONFIG_LOGLEVEL=info
-ENV NODE_VERSION=26.13.0
+ENV NODE_VERSION=${NODE_VERSION}
 
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
   && buildDeps='xz-utils curl gnupg2 lsb-release dirmngr' \
@@ -33,7 +35,7 @@ RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"
   && curl -SLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
   && grep " node-v$NODE_VERSION-linux-$PLATFORM.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
-  && tar -xJf "node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" -C /usr/local --strip-components=1 \
+  && tar -xJf "node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" -C /usr/local --strip-components=1 --exclude="node-v$NODE_VERSION-linux-$PLATFORM/include" \
   && rm "node-v$NODE_VERSION-linux-$PLATFORM.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && { gpgconf --kill all || true; } \
   && rm -rf "$GNUPGHOME" \

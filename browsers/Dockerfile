@@ -1,9 +1,9 @@
-FROM sitespeedio/visualmetrics-deps:ffmpeg-7.1.1-g
+FROM sitespeedio-visualmetrics-deps
 
 ARG TARGETPLATFORM
-ARG FIREFOX_VERSION=159.*
-ARG CHROME_VERSION=156.*
-ARG EDGE_VERSION=156.*
+ARG FIREFOX_VERSION
+ARG CHROME_VERSION
+ARG EDGE_VERSION
 
 ENV LC_ALL=C
 ENV DEBIAN_FRONTEND=noninteractive
@@ -61,11 +61,13 @@ RUN fonts='fonts-ipafont-gothic fonts-ipafont-mincho ttf-wqy-microhei fonts-wqy-
       echo "deb [arch=arm64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
       add-apt-repository -y ppa:xtradeb/apps && \
       apt-get update && \
-      # chromium-driver (pulls in chromium) is used as chromedriver until Chrome for Testing is published for linux-arm64
-      apt-get install -y --no-install-recommends chromium-driver && \
       apt-get install -y -t 'o=LP-PPA-mozillateam' firefox && \
       apt-get install -y google-chrome-stable=${CHROME_VERSION} && \
-      ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver; \
+      # The chromedriver npm package does not download the Chrome for Testing linux-arm64 driver, so install it on the PATH
+      CHROMEDRIVER_VERSION=$(wget -q -O- "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_${CHROME_VERSION%%.*}") && \
+      wget -q -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux-arm64/chromedriver-linux-arm64.zip" && \
+      unzip -j /tmp/chromedriver.zip chromedriver-linux-arm64/chromedriver -d /usr/local/bin && \
+      rm /tmp/chromedriver.zip; \
   else \
       echo "Unsupported TARGETPLATFORM: $TARGETPLATFORM" >&2 && exit 1; \
   fi && \
