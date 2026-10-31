@@ -11,7 +11,7 @@ ENV NODE_VERSION=26.13.0
 RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"; else echo "arm64"; fi) \
   && buildDeps='xz-utils curl gnupg2 lsb-release dirmngr' \
   && set -x \
-  && apt-get update && apt-get install -y --no-install-recommends ca-certificates $buildDeps \
+  && apt-get update && apt-get install -y --no-install-recommends ca-certificates libatomic1 $buildDeps \
   && rm -rf /var/lib/apt/lists/* \
   # gpg keys listed at https://github.com/nodejs/node#release-keys
   && set -ex \
@@ -38,7 +38,8 @@ RUN export PLATFORM=$(if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then echo "x64"
   && { gpgconf --kill all || true; } \
   && rm -rf "$GNUPGHOME" \
   && apt-get purge -y --auto-remove $buildDeps \
-  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
+  && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+  && node --version
 
 
 CMD [ "npm", "--version" ]
